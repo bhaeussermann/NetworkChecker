@@ -1,16 +1,27 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Windows.Forms;
 
 namespace NetworkChecker
 {
-    static class Program
+    class Program : WindowsFormsApplicationBase
     {
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            new Program().Run(args);
+        }
+
+        private Program()
+        {
+            IsSingleInstance = true;
+        }
+
+        protected override bool OnStartup(StartupEventArgs eventArgs)
+        {
+            EnableVisualStyles = true;
             Application.Run(new CustomApplicationContext());
+            return false;
         }
     }
 }
